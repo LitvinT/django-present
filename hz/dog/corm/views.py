@@ -27,6 +27,9 @@ class IndexTemplateView(BaseMixin,TemplateView):
         ]
 
 
+class AboutTemplateView(BaseMixin,TemplateView):
+    template_name = 'main/about.html'
+
 
 
 
