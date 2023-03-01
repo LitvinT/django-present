@@ -1,7 +1,10 @@
+from django.http import HttpRequest
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, ListView, CreateView
 
-from .models import Team, Comment
+from .forms import ContactForm
+from .models import Team, Comment, Contact
 
 
 class BaseMixin:
@@ -54,13 +57,14 @@ class BlogTemplateView(BaseMixin, TemplateView):
 class ContactTemplateView(BaseMixin, TemplateView):
     template_name = 'main/contact.html'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['contact_form'] = ContactForm()
+        return context
 
-# class WorkScheduleListView(ListView):
-#     template_name = 'main/store.html'
-#     context_object_name = 'week'
-#     model = WorkSchedule
-#
-#     def get_context_data(self, *, object_list=None, **kwargs):
-#         context = super().get_context_data()
-#         context['weekday'] = datetime.today().isoweekday() + 6
-#         return context
+    def post(self, request: HttpRequest):
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return self.get(request)
+

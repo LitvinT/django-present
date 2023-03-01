@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Team, Comment
+from .models import Category, Team, Comment, Contact
 
 
 @admin.register(Category)
@@ -25,3 +25,8 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ('category', 'is_published')
     search_fields = ('name',)
     ordering = ('is_published', 'name', 'permission')
+
+
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ['email', 'name']

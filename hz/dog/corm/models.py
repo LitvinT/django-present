@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 
 
 class Category(models.Model):
@@ -85,3 +86,30 @@ class Comment(models.Model):
         default=True,
         verbose_name='публикация'
     )
+
+
+class Contact(models.Model):
+    name = models.CharField(
+        max_length=32,
+        verbose_name='name'
+    )
+    email = models.EmailField(
+        verbose_name='email'
+    )
+    message = models.CharField(
+        max_length=1024,
+        verbose_name='message'
+    )
+    date_created = models.DateTimeField(
+        default=now,
+        verbose_name='date created'
+    )
+
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        db_table = 'main_contacts'
+        verbose_name = 'contact'
+        verbose_name_plural = 'contacts'
+        ordering = ['date_created']
