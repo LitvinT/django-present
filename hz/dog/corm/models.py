@@ -36,7 +36,13 @@ class Team(models.Model):
     )
     image = models.ImageField(
         upload_to='index/',
-        verbose_name='картинка'
+        verbose_name='картинка',
+
+    )
+    about_image = models.ImageField(
+        upload_to='about/',
+        verbose_name='картинка-номер',
+        null=True
     )
     category = models.ForeignKey(
         'Category',
@@ -51,3 +57,31 @@ class Team(models.Model):
         db_table = 'corm_team'
         verbose_name = 'команда'
         verbose_name_plural = 'команда'
+
+
+class Comment(models.Model):
+    name = models.CharField(
+        max_length=16,
+        verbose_name='имя'
+    )
+    permission = models.CharField(
+        max_length=32,
+        verbose_name='должность'
+    )
+    title = models.CharField(
+        max_length=256,
+        verbose_name='описание'
+    )
+    image = models.ImageField(
+        upload_to='index/',
+        verbose_name='картинка'
+    )
+    category = models.ForeignKey(
+        'Category',
+        on_delete=models.CASCADE,
+        verbose_name='категория'
+    )
+    is_published = models.BooleanField(
+        default=True,
+        verbose_name='публикация'
+    )

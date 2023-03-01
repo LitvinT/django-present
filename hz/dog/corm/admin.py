@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Team
+from .models import Category, Team, Comment
 
 
 @admin.register(Category)
@@ -17,3 +17,11 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('category', 'is_published')
     search_fields = ('name', )
     ordering = ('is_published', 'name')
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'category', 'is_published')
+    list_filter = ('category', 'is_published')
+    search_fields = ('name',)
+    ordering = ('is_published', 'name', 'permission')

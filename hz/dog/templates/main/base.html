@@ -48,16 +48,16 @@
                         </div>
                         <div class="col-lg-6 col-md-4 ">
                             <div class="social_media_links">
-                                <a href="#">
+                                <a href="{{ facebook }}">
                                     <i class="fa fa-facebook"></i>
                                 </a>
-                                <a href="#">
+                                <a href="{{ fontawesome }}">
                                     <i class="fa fa-pinterest-p"></i>
                                 </a>
-                                <a href="#">
+                                <a href="{{ google }}">
                                     <i class="fa fa-google-plus"></i>
                                 </a>
-                                <a href="#">
+                                <a href="{{ linkedin }}">
                                     <i class="fa fa-linkedin"></i>
                                 </a>
                             </div>
@@ -70,7 +70,7 @@
                     <div class="row align-items-center">
                         <div class="col-xl-3 col-lg-3">
                             <div class="logo">
-                                <a href="index.html">
+                                <a href="{% url 'index' %}">
                                     <img src="{% static 'img/logo.png' %}" alt="">
                                 </a>
                             </div>
@@ -79,11 +79,11 @@
                             <div class="main-menu  d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a  href="index.html">home</a></li>
-                                        <li><a href="about.html">about</a></li>
-                                        <li><a href="#">blog <i class="ti-angle-down"></i></a>
+                                        <li><a  href="{% url 'index' %}">home</a></li>
+                                        <li><a href="{% url 'about' %}">about</a></li>
+                                        <li><a href="{% url 'blog' %}">blog <i class="ti-angle-down"></i></a>
                                             <ul class="submenu">
-                                                <li><a href="blog.html">blog</a></li>
+                                                <li><a href="{% url 'blog' %}">blog</a></li>
                                                 <li><a href="single-blog.html">single-blog</a></li>
                                             </ul>
                                         </li>
@@ -94,7 +94,7 @@
                                             </ul>
                                         </li>
                                         <li><a href="service.html">services</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="{% url 'contact' %}">Contact</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -117,7 +117,7 @@
                         <div class="slider_text">
                             <h3>We Care <br> <span>Your Pets</span></h3>
                             <p>Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit, sed do eiusmod.</p>
-                            <a href="contact.html" class="boxed-btn4">Contact Us</a>
+                            <a href="{% url 'contact' %}" class="boxed-btn4">Contact Us</a>
                         </div>
                     </div>
                 </div>
@@ -201,7 +201,7 @@
                                 As you care</h3>
                             <p>Lorem ipsum dolor sit , consectetur adipiscing elit, sed do <br> iusmod tempor incididunt ut labore et dolore magna aliqua. <br> Quis ipsum suspendisse ultrices gravida. Risus commodo <br>
                                 viverra maecenas accumsan.</p>
-                            <a href="about.html" class="boxed-btn3">About Us</a>
+                            <a href="{% url 'about' %}" class="boxed-btn3">About Us</a>
                         </div>
                     </div>
                 </div>
@@ -220,7 +220,7 @@
                             <h3><span>We need your</span>
                                 help Adopt Us</h3>
                             <p>Lorem ipsum dolor sit , consectetur adipiscing elit, sed do iusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices.</p>
-                            <a href="contact.html" class="boxed-btn3">Contact Us</a>
+                            <a href="{% url 'contact' %}" class="boxed-btn3">Contact Us</a>
                         </div>
                     </div>
                 </div>
@@ -266,42 +266,20 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="textmonial_active owl-carousel">
+                        {% for comment in com %}
                         <div class="testmonial_wrap">
                             <div class="single_testmonial d-flex align-items-center">
                                 <div class="test_thumb">
-                                    <img src="{% static 'img/testmonial/1.png' %}" alt="">
+                                    <img src="{{ comment.image.url }}" alt="">
                                 </div>
                                 <div class="test_content">
-                                    <h4>Jhon Walker</h4>
-                                    <span>Head of web design</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exerci.</p>
+                                    <h4>{{ comment.name }}</h4>
+                                    <span>{{ comment.permission }}</span>
+                                    <p>{{ comment.title }}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="testmonial_wrap">
-                            <div class="single_testmonial d-flex align-items-center">
-                                <div class="test_thumb">
-                                    <img src="{% static 'img/testmonial/1.png' %}" alt="">
-                                </div>
-                                <div class="test_content">
-                                    <h4>Jhon Walker</h4>
-                                    <span>Head of web design</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exerci.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testmonial_wrap">
-                            <div class="single_testmonial d-flex align-items-center">
-                                <div class="test_thumb">
-                                    <img src="{% static 'img/testmonial/1.png' %}" alt="">
-                                </div>
-                                <div class="test_content">
-                                    <h4>Jhon Walker</h4>
-                                    <span>Head of web design</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exerci.</p>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -322,8 +300,8 @@
                     </div>
                 </div>
             </div>
-            {% for near in team %}
             <div class="row justify-content-center">
+                {% for near in team %}
                 <div class="col-lg-4 col-md-6">
                     <div class="single_team">
                         <div class="thumb">
@@ -337,8 +315,8 @@
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
 
@@ -354,7 +332,7 @@
                             <p>Because we know that even the best technology is only as good as the people behind it. 24/7 tech support.</p>
                         </div>
                         <div class="contact_btn d-flex align-items-center justify-content-center">
-                            <a href="contact.html" class="boxed-btn4">Contact Us</a>
+                            <a href="{% url 'contact' %}" class="boxed-btn4">Contact Us</a>
                             <p>Or  <a href="#"> +880 4664 216</a></p>
                         </div>
                     </div>
@@ -421,22 +399,22 @@
                             <div class="socail_links">
                                 <ul>
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ facebook }}">
                                             <i class="ti-facebook"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ fontawesome }}">
                                             <i class="ti-pinterest"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ google }}">
                                             <i class="fa fa-google-plus"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ linkedin }}">
                                             <i class="fa fa-linkedin"></i>
                                         </a>
                                     </li>
