@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
     <!-- Place favicon.ico in the root directory -->
 <!--{% static '' %}-->
     <!-- CSS here -->
@@ -78,7 +78,7 @@
                         <div class="col-xl-9 col-lg-9">
                             <div class="main-menu  d-none d-lg-block">
                                 <nav>
-                                    <ul id="navigation">
+                                     <ul id="navigation">
                                         <li><a  href="{% url 'index' %}">home</a></li>
                                         <li><a href="{% url 'about' %}">about</a></li>
                                         <li><a href="{% url 'blog' %}">blog <i class="ti-angle-down"></i></a>
@@ -87,13 +87,13 @@
                                                 <li><a href="single-blog.html">single-blog</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="#">pages <i class="ti-angle-down"></i></a>
+                                        <li><a href="{% url 'elements' %}">pages <i class="ti-angle-down"></i></a>
                                             <ul class="submenu">
-                                                <li><a href="elements.html">elements</a></li>
+                                                <li><a href="{% url 'elements' %}">elements</a></li>
 
                                             </ul>
                                         </li>
-                                        <li><a href="service.html">services</a></li>
+                                        <li><a href="{% url 'services' %}">services</a></li>
                                         <li><a href="{% url 'contact' %}">Contact</a></li>
                                     </ul>
                                 </nav>
@@ -141,45 +141,21 @@
                 </div>
             </div>
             <div class="row justify-content-center">
+                {% for prod in product %}
                 <div class="col-lg-4 col-md-6">
                     <div class="single_service">
                          <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
                              <div class="service_icon">
-                                 <img src="{% static 'img/service/service_icon_1.png' %}" alt="">
+                                 <img src="{{ prod.image.url }}" alt="">
                              </div>
                          </div>
                          <div class="service_content text-center">
-                            <h3>Pet Boarding</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut</p>
+                            <h3>{{ prod.name }}</h3>
+                            <p>{{ prod.descr }}</p>
                          </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service active">
-                         <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                             <div class="service_icon">
-                                 <img src="{% static 'img/service/service_icon_2.png' %}" alt="">
-                             </div>
-                         </div>
-                         <div class="service_content text-center">
-                            <h3>Healthy Meals</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut</p>
-                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single_service">
-                         <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
-                             <div class="service_icon">
-                                 <img src="{% static 'img/service/service_icon_3.png' %}" alt="">
-                             </div>
-                         </div>
-                         <div class="service_content text-center">
-                            <h3>Pet Spa</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut</p>
-                         </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -364,11 +340,11 @@
                                 Our Servces
                             </h3>
                             <ul class="links">
-                                <li><a href="#">Pet Insurance</a></li>
-                                <li><a href="#">Pet surgeries </a></li>
-                                <li><a href="#">Pet Adoption</a></li>
-                                <li><a href="#">Dog Insurance</a></li>
-                                <li><a href="#">Dog Insurance</a></li>
+                                <li><a href="{% url 'services' %}">Pet Insurance</a></li>
+                                <li><a href="{% url 'services' %}">Pet surgeries </a></li>
+                                <li><a href="{% url 'services' %}">Pet Adoption</a></li>
+                                <li><a href="{% url 'services' %}">Dog Insurance</a></li>
+                                <li><a href="{% url 'services' %}">Dog Insurance</a></li>
                             </ul>
                         </div>
                     </div>
@@ -378,7 +354,7 @@
                                 Quick Link
                             </h3>
                             <ul class="links">
-                                <li><a href="#">About Us</a></li>
+                                <li><a href="{% url 'about' %}">About Us</a></li>
                                 <li><a href="#">Privacy Policy</a></li>
                                 <li><a href="#">Terms of Service</a></li>
                                 <li><a href="#">Login info</a></li>
@@ -389,7 +365,7 @@
                     <div class="col-xl-3 col-md-6 col-lg-3 ">
                         <div class="footer_widget">
                             <div class="footer_logo">
-                                <a href="#">
+                                <a href="{% url 'index' %}">
                                     <img src="{% static 'img/logo.png' %}" alt="">
                                 </a>
                             </div>

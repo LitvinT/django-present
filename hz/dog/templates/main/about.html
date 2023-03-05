@@ -79,7 +79,7 @@
                         <div class="col-xl-9 col-lg-9">
                             <div class="main-menu  d-none d-lg-block">
                                 <nav>
-                                    <ul id="navigation">
+                                     <ul id="navigation">
                                         <li><a  href="{% url 'index' %}">home</a></li>
                                         <li><a href="{% url 'about' %}">about</a></li>
                                         <li><a href="{% url 'blog' %}">blog <i class="ti-angle-down"></i></a>
@@ -88,13 +88,13 @@
                                                 <li><a href="single-blog.html">single-blog</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="#">pages <i class="ti-angle-down"></i></a>
+                                        <li><a href="{% url 'elements' %}">pages <i class="ti-angle-down"></i></a>
                                             <ul class="submenu">
-                                                <li><a href="elements.html">elements</a></li>
-                                                
+                                                <li><a href="{% url 'elements' %}">elements</a></li>
+
                                             </ul>
                                         </li>
-                                        <li><a href="service.html">services</a></li>
+                                        <li><a href="{% url 'services' %}">services</a></li>
                                         <li><a href="{% url 'contact' %}">Contact</a></li>
                                     </ul>
                                 </nav>

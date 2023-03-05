@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, CreateView
 
 from .forms import ContactForm
-from .models import Team, Comment, Contact
+from .models import Team, Comment, Contact, Product
 
 
 class BaseMixin:
@@ -16,13 +16,14 @@ class BaseMixin:
     }
 
 
-class IndexTemplateView(BaseMixin,TemplateView):
+class IndexTemplateView(BaseMixin, TemplateView):
     template_name = 'main/index.html'
 
     def get_context_data(self, **kwargs):
         context = super(IndexTemplateView, self).get_context_data()
         context['team'] = Team.objects.all()
         context['com'] = Comment.objects.all()
+        context['product'] = Product.objects.all()
         context.update(self.context)
         return context
 
@@ -30,6 +31,7 @@ class IndexTemplateView(BaseMixin,TemplateView):
         return [
             Team.objects.filter(is_published=True),
             Comment.objects.filter(is_published=True),
+            Product.objects.filter(is_published=True)
         ]
 
 
@@ -54,17 +56,36 @@ class BlogTemplateView(BaseMixin, TemplateView):
     template_name = 'main/blog.html'
 
 
-class ContactTemplateView(BaseMixin, TemplateView):
+class ContactCreateView(BaseMixin, CreateView):
     template_name = 'main/contact.html'
+    model = Contact
+    form_class = ContactForm
+    success_url = reverse_lazy('index')
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        context['contact_form'] = ContactForm()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context.update(self.context)
         return context
 
-    def post(self, request: HttpRequest):
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form.save()
-        return self.get(request)
 
+class ServiceTemplateView(BaseMixin, TemplateView):
+    template_name = 'main/service.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ServiceTemplateView, self).get_context_data()
+        context['teams'] = Team.objects.all()
+        context['com'] = Comment.objects.all()
+        context['product'] = Product.objects.all()
+        context.update(self.context)
+        return context
+
+    def get_queryset(self):
+        return [
+            Team.objects.filter(is_published=True),
+            Comment.objects.filter(is_published=True),
+            Product.objects.filter(is_published=True)
+        ]
+
+
+class PagesTemplateView(BaseMixin, TemplateView):
+    template_name = 'main/elements.html'

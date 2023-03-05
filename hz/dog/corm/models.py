@@ -43,7 +43,8 @@ class Team(models.Model):
     about_image = models.ImageField(
         upload_to='about/',
         verbose_name='картинка-номер',
-        null=True
+        null=True,
+        blank=True
     )
     category = models.ForeignKey(
         'Category',
@@ -113,3 +114,74 @@ class Contact(models.Model):
         verbose_name = 'contact'
         verbose_name_plural = 'contacts'
         ordering = ['date_created']
+
+
+class Product(models.Model):
+    name = models.CharField(
+        max_length=32,
+        verbose_name='услуга',
+        null=False
+    )
+    descr = models.CharField(
+        max_length=256,
+        verbose_name='описание',
+        null=False,
+    )
+    category = models.ForeignKey(
+        'Category',
+        on_delete=models.CASCADE,
+        verbose_name='категория'
+    )
+    image = models.ImageField(
+        verbose_name='картинка'
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'corm_products'
+        verbose_name = 'product'
+        verbose_name_plural = 'products'
+
+
+class Text(models.Model):
+    name = models.CharField(
+        max_length=16,
+        verbose_name='Заголовок',
+        null=False
+    )
+    descr = models.CharField(
+        max_length=1048,
+        verbose_name='описание',
+        null=False,
+    )
+    category = models.ForeignKey(
+        'Category',
+        on_delete=models.CASCADE,
+        verbose_name='категория'
+    )
+
+    class Meta:
+        db_table = 'corm_text'
+        verbose_name = 'text'
+        verbose_name_plural = 'text'
+
+
+class Gallery(models.Model):
+    category = models.ForeignKey(
+        'Category',
+        on_delete=models.CASCADE,
+        verbose_name='категория'
+    )
+    image = models.ImageField(
+        verbose_name='картинка'
+    )
+
+    class Meta:
+        db_table = 'corm_gallery'
+        verbose_name = 'gallery'
+        verbose_name_plural = 'gallery'
+
+
+
