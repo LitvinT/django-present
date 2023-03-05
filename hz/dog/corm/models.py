@@ -175,7 +175,8 @@ class Gallery(models.Model):
         verbose_name='категория'
     )
     image = models.ImageField(
-        verbose_name='картинка'
+        verbose_name='картинка',
+        upload_to='elements/'
     )
 
     class Meta:
@@ -184,4 +185,102 @@ class Gallery(models.Model):
         verbose_name_plural = 'gallery'
 
 
+class Right(models.Model):
+    name = models.CharField(
+        max_length=24,
+        verbose_name='Заголовок',
+        null=False
+    )
+    descr = models.CharField(
+        max_length=1048,
+        verbose_name='описание',
+        null=False,
+    )
+    category = models.ForeignKey(
+        'Category',
+        on_delete=models.CASCADE,
+        verbose_name='категория'
+    )
+    image = models.ImageField(
+        verbose_name='картинка',
+        upload_to='elements/'
+    )
+
+    class Meta:
+        db_table = 'corm_right'
+        verbose_name = 'right'
+        verbose_name_plural = 'right'
+
+
+class Left(models.Model):
+    name = models.CharField(
+        max_length=24,
+        verbose_name='Заголовок',
+        null=False
+    )
+    descr = models.CharField(
+        max_length=1048,
+        verbose_name='описание',
+        null=False,
+    )
+    category = models.ForeignKey(
+        'Category',
+        on_delete=models.CASCADE,
+        verbose_name='категория'
+    )
+    image = models.ImageField(
+        verbose_name='картинка',
+        upload_to='elements/'
+    )
+
+    class Meta:
+        db_table = 'corm_left'
+        verbose_name = 'left'
+        verbose_name_plural = 'left'
+
+
+class Descr(models.Model):
+    last_name = models.CharField(
+        max_length=24,
+        verbose_name='Заголовок-2',
+        null=False
+    )
+    descr = models.CharField(
+        max_length=512,
+        verbose_name='описание',
+        null=False,
+    )
+    category = models.ForeignKey(
+        'Category',
+        on_delete=models.CASCADE,
+        verbose_name='категория'
+    )
+
+    class Meta:
+        db_table = 'corm_descr'
+        verbose_name = 'descr'
+        verbose_name_plural = 'descr'
+
+
+class BlockQ(models.Model):
+    name = models.CharField(
+        max_length=24,
+        verbose_name='Заголовок',
+        null=False
+    )
+    descr = models.CharField(
+        max_length=512,
+        verbose_name='описание',
+        null=False,
+    )
+    category = models.ForeignKey(
+        'Category',
+        on_delete=models.CASCADE,
+        verbose_name='категория'
+    )
+
+    class Meta:
+        db_table = 'corm_blockq'
+        verbose_name = 'blockq'
+        verbose_name_plural = 'blockq'
 

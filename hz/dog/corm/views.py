@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, CreateView
 
 from .forms import ContactForm
-from .models import Team, Comment, Contact, Product
+from .models import Team, Comment, Contact, Product, Text,  Gallery, BlockQ, Descr, Right, Left
 
 
 class BaseMixin:
@@ -89,3 +89,25 @@ class ServiceTemplateView(BaseMixin, TemplateView):
 
 class PagesTemplateView(BaseMixin, TemplateView):
     template_name = 'main/elements.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PagesTemplateView, self).get_context_data()
+        context['gallery'] = Gallery.objects.all()
+        context['texts'] = Text.objects.all()
+        context['ret'] = Right.objects.all()
+        context['left'] = Left.objects.all()
+        context['descr'] = Descr.objects.all()
+        context['block'] = BlockQ.objects.all()
+        context.update(self.context)
+        return context
+
+    def get_queryset(self):
+        return [
+            Text.objects.filter(is_published=True),
+            Gallery.objects.filter(is_published=True),
+            Right.objects.filter(is_published=True),
+            Left.objects.filter(is_published=True),
+            Descr.objects.filter(is_published=True),
+            BlockQ.objects.filter(is_published=True)
+        ]
+
