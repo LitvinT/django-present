@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Team, Comment, Contact, Product, Text, Gallery, Descr, Right, BlockQ, Left
+from .models import Category, Team, Comment, Contact, Product, Text, Gallery, Descr, Right, BlockQ, Left, Countries
 
 
 @admin.register(Category)
@@ -67,3 +67,8 @@ class DescrAdmin(admin.ModelAdmin):
 @admin.register(BlockQ)
 class BlockqAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'descr')
+
+
+@admin.register(Countries)
+class CountriesAdmin(admin.ModelAdmin):
+    list_display = ('name', 'category', 'number', 'image', 'perc', 'visits', 'color')

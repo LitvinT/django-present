@@ -284,3 +284,41 @@ class BlockQ(models.Model):
         verbose_name = 'blockq'
         verbose_name_plural = 'blockq'
 
+
+class Countries(models.Model):
+    category = models.ForeignKey(
+        'Category',
+        on_delete=models.CASCADE,
+        verbose_name='категория'
+    )
+    number = models.IntegerField(
+        null=False,
+        verbose_name='номер'
+    )
+    image = models.ImageField(
+        verbose_name='картинка',
+        upload_to='elements/'
+    )
+    name = models.CharField(
+        max_length=24,
+        verbose_name='флаг',
+        null=False
+    )
+    visits = models.IntegerField(
+        null=False,
+        verbose_name='номер-посешений'
+    )
+    perc = models.IntegerField(
+        null=False,
+        verbose_name='посешения'
+    )
+    color = models.IntegerField(
+        null=True,
+        verbose_name='цвет'
+    )
+
+    class Meta:
+        db_table = 'corm_countries'
+        verbose_name = 'country'
+        verbose_name_plural = 'countries'
+

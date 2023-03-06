@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, CreateView
 
 from .forms import ContactForm
-from .models import Team, Comment, Contact, Product, Text,  Gallery, BlockQ, Descr, Right, Left
+from .models import Team, Comment, Contact, Product, Text,  Gallery, BlockQ, Descr, Right, Left, Countries
 
 
 class BaseMixin:
@@ -98,6 +98,7 @@ class PagesTemplateView(BaseMixin, TemplateView):
         context['left'] = Left.objects.all()
         context['descr'] = Descr.objects.all()
         context['block'] = BlockQ.objects.all()
+        context['count'] = Countries.objects.all()
         context.update(self.context)
         return context
 
@@ -108,6 +109,7 @@ class PagesTemplateView(BaseMixin, TemplateView):
             Right.objects.filter(is_published=True),
             Left.objects.filter(is_published=True),
             Descr.objects.filter(is_published=True),
-            BlockQ.objects.filter(is_published=True)
+            BlockQ.objects.filter(is_published=True),
+            Countries.objects.filter(is_published=True)
         ]
 
