@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corm.apps.CormConfig'
+    'corm.apps.CormConfig',
+    'registration.apps.RegistrationConfig'
 ]
 
 MIDDLEWARE = [
