@@ -85,7 +85,7 @@
                                         <li><a href="{% url 'blog' %}">blog <i class="ti-angle-down"></i></a>
                                             <ul class="submenu">
                                                 <li><a href="{% url 'blog' %}">blog</a></li>
-                                                <li><a href="single-blog.html">single-blog</a></li>
+                                                <li><a href="{% url 'single-blog' %}">single-blog</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="{% url 'elements' %}">pages <i class="ti-angle-down"></i></a>
@@ -131,114 +131,27 @@
             <div class="row">
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     <div class="blog_left_sidebar">
+                        {% for i in blog %}
                         <article class="blog_item">
                             <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="{% static 'img/blog/single_blog_1.png' %}" alt="">
+                                <img class="card-img rounded-0" src="{{ i.image.url }}" alt="">
                                 <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
+                                    <h3>{{ i.day }}</h3>
+                                    <p>{{ i.mount }}</p>
                                 </a>
                             </div>
 
                             <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
+                                <a class="d-inline-block" href="{% url 'single-blog' %}">
+                                    <h2>{{ i.text }}</h2>
                                 </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
+                                <p>{{ i.descr }}</p>
                                 <ul class="blog-info-link">
-                                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                                    <li><a href="{% url 'single-blog' %}"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
+                                    <li><a href="{% url 'single-blog' %}"><i class="fa fa-comments"></i> 03 Comments</a></li>
                                 </ul>
                             </div>
-                        </article>
-
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="{% static 'img/blog/single_blog_2.png' %}" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
-                                </a>
-                            </div>
-
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
-                                </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
-                        </article>
-
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="{% static 'img/blog/single_blog_3.png' %}" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
-                                </a>
-                            </div>
-
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
-                                </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
-                        </article>
-
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="{% static 'img/blog/single_blog_4.png' %}" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
-                                </a>
-                            </div>
-
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
-                                </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
-                        </article>
-
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="{% static 'img/blog/single_blog_5.png' %}" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
-                                </a>
-                            </div>
-
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
-                                </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
+                            {% endfor %}
                         </article>
 
                         <nav class="blog-pagination justify-content-center d-flex">
@@ -284,84 +197,32 @@
 
                         <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">Category</h4>
+                            {% for i in cat %}
                             <ul class="list cat-list">
                                 <li>
                                     <a href="#" class="d-flex">
-                                        <p>Resaurant food</p>
-                                        <p>(37)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Travel news</p>
-                                        <p>(10)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Modern technology</p>
-                                        <p>(03)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Product</p>
-                                        <p>(11)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Inspiration</p>
-                                        <p>21</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Health Care (21)</p>
-                                        <p>09</p>
+                                        <p>{{ i.name }} </p>
+                                        <p> ({{ i.count }})</p>
                                     </a>
                                 </li>
                             </ul>
+                            {% endfor %}
                         </aside>
 
+
                         <aside class="single_sidebar_widget popular_post_widget">
-                            <h3 class="widget_title">Recent Post</h3>
+                            {% for i in post %}<h3 class="widget_title">{{ i.name }}</h3>{% endfor %}
+                            {% for i in res %}
                             <div class="media post_item">
-                                <img src="{% static 'img/post/post_1.png' %}" alt="post">
+                                <img src="{{ i.image.url }}" alt="post">
                                 <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>From life was you fish...</h3>
+                                    <a href="{% url 'single-blog' %}">
+                                        <h3>{{ i.name }}</h3>
                                     </a>
-                                    <p>January 12, 2019</p>
+                                    <p>{{ i.date }}</p>
                                 </div>
                             </div>
-                            <div class="media post_item">
-                                <img src="{% static 'img/post/post_2.png' %}" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>The Amazing Hubble</h3>
-                                    </a>
-                                    <p>02 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="{% static 'img/post/post_3.png' %}" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>Astronomy Or Astrology</h3>
-                                    </a>
-                                    <p>03 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="{% static 'img/post/post_4.png' %}" alt="post">
-                                <div class="media-body">
-                                    <a href="single-blog.html">
-                                        <h3>Asteroids telescope</h3>
-                                    </a>
-                                    <p>01 Hours ago</p>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </aside>
                         <aside class="single_sidebar_widget tag_cloud_widget">
                             <h4 class="widget_title">Tag Clouds</h4>
@@ -397,36 +258,13 @@
                         <aside class="single_sidebar_widget instagram_feeds">
                             <h4 class="widget_title">Instagram Feeds</h4>
                             <ul class="instagram_row flex-wrap">
+                                {% for i in inst %}
                                 <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="{% static 'img/post/post_5.png' %}" alt="">
+                                    <a href="{{ Instagram }}">
+                                        <img class="img-fluid" src="{{ i.image.url }}" alt="">
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="{% static 'img/post/post_6.png' %}" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="{% static 'img/post/post_7.png' %}" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="{% static 'img/post/post_8.png' %}" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="{% static 'img/post/post_9.png' %}" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="{% static 'img/post/post_10.png' %}" alt="">
-                                    </a>
-                                </li>
+                                {% endfor %}
                             </ul>
                         </aside>
 
@@ -434,10 +272,10 @@
                         <aside class="single_sidebar_widget newsletter_widget">
                             <h4 class="widget_title">Newsletter</h4>
 
-                            <form action="#">
+                            <form method="post">
+                                {% csrf_token %}
                                 <div class="form-group">
-                                    <input type="email" class="form-control" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
+                                    {{ form.email }}
                                 </div>
                                 <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
                                     type="submit">Subscribe</button>

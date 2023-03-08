@@ -3,8 +3,9 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, CreateView
 
-from .forms import ContactForm
-from .models import Team, Comment, Contact, Product, Text,  Gallery, BlockQ, Descr, Right, Left, Countries
+from .forms import ContactForm, Contact2Form
+from .models import Team, Comment, Contact, Product, Text, Gallery, BlockQ, Descr, Right, Left, Countries, Blog, \
+    Contact_blog, Blogcategory, Instagram, Recent, Posts
 
 
 class BaseMixin:
@@ -13,6 +14,7 @@ class BaseMixin:
         'fontawesome': 'https://fontawesome.com',
         'google': 'https://google.com',
         'linkedin': 'https://www.linkedin.com',
+        'Instagram': 'https://www.instagram.com',
     }
 
 
@@ -52,8 +54,30 @@ class AboutTemplateView(BaseMixin, ListView):
         ]
 
 
-class BlogTemplateView(BaseMixin, TemplateView):
+class BlogCreateView(BaseMixin, CreateView):
     template_name = 'main/blog.html'
+    model = Contact_blog
+    form_class = Contact2Form
+    success_url = reverse_lazy('blog')
+
+    def get_context_data(self, **kwargs):
+        context = super(BlogCreateView, self).get_context_data()
+        context['blog'] = Blog.objects.all()
+        context['cat'] = Blogcategory.objects.all()
+        context['inst'] = Instagram.objects.all()
+        context['res'] = Recent.objects.all()
+        context['post'] = Posts.objects.all()
+        context.update(self.context)
+        return context
+
+    def get_queryset(self):
+        return [
+            Blog.objects.filter(is_published=True),
+            Blogcategory.objects.filter(is_published=True),
+            Instagram.objects.filter(is_published=True),
+            Posts.objects.filter(is_published=True),
+            Recent.objects.filter(is_published=True),
+        ]
 
 
 class ContactCreateView(BaseMixin, CreateView):
@@ -112,4 +136,9 @@ class PagesTemplateView(BaseMixin, TemplateView):
             BlockQ.objects.filter(is_published=True),
             Countries.objects.filter(is_published=True)
         ]
+
+
+class SingleTemplateView(BaseMixin, TemplateView):
+    template_name = 'main/single-blog.html'
+
 

@@ -322,3 +322,123 @@ class Countries(models.Model):
         verbose_name = 'country'
         verbose_name_plural = 'countries'
 
+
+class Blog(models.Model):
+    category = models.ForeignKey(
+        'Category',
+        on_delete=models.CASCADE,
+        verbose_name='категория'
+    )
+    image = models.ImageField(
+        verbose_name='картинка'
+    )
+    day = models.IntegerField(
+        verbose_name='день'
+    )
+    mount = models.CharField(
+        max_length=16,
+        verbose_name='месяц'
+    )
+    text = models.CharField(
+        max_length=128,
+        verbose_name='заголовок-текст',
+        null=False
+    )
+    descr = models.CharField(
+        max_length=512,
+        verbose_name='описание',
+        null=False,
+    )
+
+    class Meta:
+        db_table = 'corm_blog'
+        verbose_name = 'blog'
+        verbose_name_plural = 'blog'
+
+
+class Contact_blog(models.Model):
+    email = models.EmailField(
+        verbose_name='email'
+    )
+
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        db_table = 'main_blog'
+        verbose_name = 'blog_email_contact'
+        verbose_name_plural = 'contacts'
+
+
+class Blogcategory(models.Model):
+    name = models.CharField(
+        max_length=32,
+        verbose_name='имя'
+    )
+    count = models.IntegerField(
+        verbose_name='колл'
+    )
+    category = models.ForeignKey(
+        'Category',
+        on_delete=models.CASCADE,
+        verbose_name='категория'
+    )
+
+    class Meta:
+        db_table = 'corm_blog_category'
+        verbose_name = 'blog-cat'
+        verbose_name_plural = 'blog-cat'
+
+
+class Instagram(models.Model):
+    category = models.ForeignKey(
+        'Category',
+        on_delete=models.CASCADE,
+        verbose_name='категория'
+    )
+    image = models.ImageField(
+        verbose_name='картинка',
+        upload_to='blog/'
+    )
+    class Meta:
+        db_table = 'corm_instagram'
+        verbose_name = 'instagram'
+        verbose_name_plural = 'instagram'
+
+
+class Recent(models.Model):
+    name = models.CharField(
+        max_length=64,
+        verbose_name='текст',
+        null=False
+    )
+    date = models.DateField(
+        verbose_name='дата'
+    )
+    image = models.ImageField(
+        verbose_name='картинка',
+        upload_to='blog/'
+    )
+    category = models.ForeignKey(
+        'Category',
+        on_delete=models.CASCADE,
+        verbose_name='категория'
+    )
+
+    class Meta:
+        db_table = 'corm_recent'
+        verbose_name = 'recent'
+        verbose_name_plural = 'recent'
+
+
+class Posts(models.Model):
+    name = models.CharField(
+        max_length=12,
+        verbose_name='заголовок',
+        null=False
+    )
+
+    class Meta:
+        db_table = 'corm_posts'
+        verbose_name = 'posts'
+        verbose_name_plural = 'posts'

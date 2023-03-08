@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import Category, Team, Comment, Contact, Product, Text, Gallery, Descr, Right, BlockQ, Left, Countries
+from .models import Category, Team, Comment, Contact, Product, Text, Gallery, Descr, Right, BlockQ, Left, Countries,\
+    Blog, Contact_blog, Blogcategory, Instagram, Posts, Recent
 
 
 @admin.register(Category)
@@ -30,6 +31,11 @@ class CommentAdmin(admin.ModelAdmin):
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
     list_display = ['email', 'name']
+
+
+@admin.register(Contact_blog)
+class Contact_blogAdmin(admin.ModelAdmin):
+    list_display = ['email', ]
 
 
 @admin.register(Product)
@@ -72,3 +78,29 @@ class BlockqAdmin(admin.ModelAdmin):
 @admin.register(Countries)
 class CountriesAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'number', 'image', 'perc', 'visits', 'color')
+
+
+@admin.register(Blog)
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ('text', 'descr', 'image', 'category', 'day', 'mount')
+
+
+@admin.register(Blogcategory)
+class BlogcategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'count', 'category', )
+
+
+@admin.register(Instagram)
+class InstagramAdmin(admin.ModelAdmin):
+    list_display = ('category', 'image')
+
+
+@admin.register(Posts)
+class PostsAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
+@admin.register(Recent)
+class RecentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'date', 'image', 'category')
+
