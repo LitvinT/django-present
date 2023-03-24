@@ -131,28 +131,29 @@
             <div class="row">
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     <div class="blog_left_sidebar">
-                        {% for i in blog %}
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="{{ i.image.url }}" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>{{ i.day }}</h3>
-                                    <p>{{ i.mount }}</p>
-                                </a>
-                            </div>
-
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="{% url 'single-blog' %}">
-                                    <h2>{{ i.text }}</h2>
-                                </a>
-                                <p>{{ i.descr }}</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="{% url 'single-blog' %}"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="{% url 'single-blog' %}"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
+                        {% if object_list %}
+                            {% for object in object_list %}
+                            <article class="blog_item">
+                                <div class="blog_item_img">
+                                    <img class="card-img rounded-0" src="{{ object.image.url }}" alt="">
+                                    <a href="#" class="blog_item_date">
+                                        <h3>{{ object.day }}</h3>
+                                        <p>{{ object.mount }}</p>
+                                    </a>
+                                </div>
+                                <div class="blog_details">
+                                    <a class="d-inline-block" href="{% url 'single-blog' %}">
+                                        <h2>{{ object.text }}</h2>
+                                    </a>
+                                    <p>{{ object.descr }}</p>
+                                    <ul class="blog-info-link">
+                                        <li><a href="{% url 'single-blog' %}"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
+                                        <li><a href="{% url 'single-blog' %}"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                                    </ul>
+                                </div>
+                            </article>
                             {% endfor %}
-                        </article>
+                        {% endif %}
                         <nav class="blog-pagination justify-content-center d-flex">
                             <ul class="pagination">
                                 <li class="page-item">

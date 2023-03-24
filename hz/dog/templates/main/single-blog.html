@@ -129,9 +129,10 @@
       <div class="container">
          <div class="row">
             <div class="col-lg-8 posts-list">
+               {% for i in blog %}
                <div class="single-post">
                   <div class="feature-img">
-                     <img class="img-fluid" src="{% static 'img/blog/single_blog_1.png' %}" alt="">
+                     <img class="img-fluid" src="{{ i.image.url }}" alt="">
                   </div>
                   <div class="blog_details">
                      <h2>Second divided from form fish beast made every of seas
@@ -173,6 +174,7 @@
                      </p>
                   </div>
                </div>
+               {% endfor %}
                <div class="navigation-top">
                   <div class="d-sm-flex justify-content-between text-center">
                      <p class="like-info"><span class="align-middle"><i class="fa fa-heart"></i></span> Lily and 4

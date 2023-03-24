@@ -1,7 +1,9 @@
+from django.db.models import Q
 from django.http import HttpRequest
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, CreateView
+from django.core.paginator import Paginator
 
 from .forms import ContactForm, Contact2Form
 from .models import Team, Comment, Contact, Product, Text, Gallery, BlockQ, Descr, Right, Left, Countries, Blog, \
@@ -80,6 +82,25 @@ class BlogCreateView(BaseMixin, CreateView):
         ]
 
 
+class SearchListView(BaseMixin, ListView):
+    template_name = 'main/search.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        object_list = Blog.objects.filter(
+            Q(text__icontains=query) | Q(descr__icontains=query)
+        )
+        return object_list
+
+    # def get_queryset(self):
+    #     return Blog.objects.filter(text__icontains=self.request.GET.get("q"))
+    #
+    # def get_context_data(self, *args, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context["q"] = self.request.GET.get("q")
+    #     return context
+
+
 class ContactCreateView(BaseMixin, CreateView):
     template_name = 'main/contact.html'
     model = Contact
@@ -140,5 +161,16 @@ class PagesTemplateView(BaseMixin, TemplateView):
 
 class SingleTemplateView(BaseMixin, TemplateView):
     template_name = 'main/single-blog.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SingleTemplateView, self).get_context_data()
+        context['blog'] = Blog.objects.all()
+        context.update(self.context)
+        return context
+
+    def get_queryset(self):
+        return [
+            Blog.objects.filter(is_published=True)
+        ]
 
 
