@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import Category, Team, Comment, Contact, Product, Text, Gallery, Descr, Right, BlockQ, Left, Countries,\
-    Blog, Contact_blog, Blogcategory, Instagram, Posts, Recent
+    Blog, Contact_blog, Blogcategory, Instagram, Posts, Recent, Text1
 
 
 @admin.register(Category)
@@ -82,7 +82,7 @@ class CountriesAdmin(admin.ModelAdmin):
 
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ('text', 'descr', 'image', 'category', 'day', 'mount')
+    list_display = ('text', 'descr', 'image', 'category', 'day', 'mount', 'slug')
 
 
 @admin.register(Blogcategory)
@@ -104,3 +104,7 @@ class PostsAdmin(admin.ModelAdmin):
 class RecentAdmin(admin.ModelAdmin):
     list_display = ('name', 'date', 'image', 'category')
 
+
+@admin.register(Text1)
+class Text1Admin(admin.ModelAdmin):
+    list_display = ('text1', 'text2')

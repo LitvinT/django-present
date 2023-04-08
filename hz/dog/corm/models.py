@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.timezone import now
 
 
@@ -349,6 +350,14 @@ class Blog(models.Model):
         verbose_name='описание',
         null=False,
     )
+    slug = models.SlugField(
+        verbose_name='URL',
+        unique=False,
+        null=False
+    )
+
+    def get_absolute_url(self):
+        return reverse('blog', kwargs={'post_slug': self.slug})
 
     class Meta:
         db_table = 'corm_blog'
@@ -442,3 +451,19 @@ class Posts(models.Model):
         db_table = 'corm_posts'
         verbose_name = 'posts'
         verbose_name_plural = 'posts'
+
+
+class Text1(models.Model):
+    text1 = models.CharField(
+        max_length=512,
+        null=False
+    )
+    text2 = models.CharField(
+        max_length=512,
+        null=False
+    )
+
+    class Meta:
+        db_table = 'corm_text1'
+        verbose_name = 'text1'
+        verbose_name_plural = 'text1'

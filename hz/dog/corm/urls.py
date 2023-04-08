@@ -12,7 +12,8 @@ urlpatterns = [
     path('service/', ServiceTemplateView.as_view(), name='services'),
     path('elements/', PagesTemplateView.as_view(), name='elements'),
     path('single-blog/', SingleTemplateView.as_view(), name='single-blog'),
-    path('search/', SearchListView.as_view(), name='search')
+    path('search/', SearchListView.as_view(), name='search'),
+
 
 
 

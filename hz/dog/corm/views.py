@@ -2,12 +2,12 @@ from django.db.models import Q
 from django.http import HttpRequest
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView, CreateView
+from django.views.generic import TemplateView, ListView, CreateView, DetailView
 from django.core.paginator import Paginator
 
 from .forms import ContactForm, Contact2Form
 from .models import Team, Comment, Contact, Product, Text, Gallery, BlockQ, Descr, Right, Left, Countries, Blog, \
-    Contact_blog, Blogcategory, Instagram, Recent, Posts
+    Contact_blog, Blogcategory, Instagram, Recent, Posts, Text1
 
 
 class BaseMixin:
@@ -17,6 +17,9 @@ class BaseMixin:
         'google': 'https://google.com',
         'linkedin': 'https://www.linkedin.com',
         'Instagram': 'https://www.instagram.com',
+        'dribbble': 'https://dribbble.com',
+        'twitter': 'https://twitter.com',
+        'behance': 'https://behance.com'
     }
 
 
@@ -61,6 +64,7 @@ class BlogCreateView(BaseMixin, CreateView):
     model = Contact_blog
     form_class = Contact2Form
     success_url = reverse_lazy('blog')
+    slug_url_kwarg = 'post_slug'
 
     def get_context_data(self, **kwargs):
         context = super(BlogCreateView, self).get_context_data()
@@ -165,12 +169,23 @@ class SingleTemplateView(BaseMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(SingleTemplateView, self).get_context_data()
         context['blog'] = Blog.objects.all()
+        context['text'] = Text1.objects.all()
         context.update(self.context)
         return context
 
     def get_queryset(self):
         return [
-            Blog.objects.filter(is_published=True)
+            Blog.objects.filter(is_published=True),
+            Text1.objects.filter(is_published=True)
         ]
+
+
+class PostListView(BaseMixin, ListView):
+    template_name = 'main/blog.html'
+    context_object_name = 'news'
+    model = Blog
+
+    def get_queryset(self):
+        return Blog.objects.filter(is_published=True)
 
 
